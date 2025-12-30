@@ -1,11 +1,11 @@
-import PulseeLaunching from "@/components/pulsee-launching"
+import HeroSection from "@/components/hero-section"
 import ScrollSections from "@/components/scroll-sections"
 
 export default function Home() {
     return (
-        <>
-            <PulseeLaunching />
+        <main className="bg-black">
+            <HeroSection />
             <ScrollSections />
-        </>
+        </main>
     )
 }
