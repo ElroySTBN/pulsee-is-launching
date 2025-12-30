@@ -9,13 +9,13 @@ interface SectionProps {
 
 // Section 1: The Future of Pharmacist Scams
 const HeroScroll: React.FC<SectionProps> = ({ scrollYProgress }) => {
-    const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.85]);
-    const rotate = useTransform(scrollYProgress, [0, 0.2], [0, -3]);
+    const scale = useTransform(scrollYProgress, [0, 0.15], [1, 0.9]);
+    const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
     return (
         <motion.section
-            style={{ scale, rotate }}
-            className="sticky font-semibold top-0 min-h-screen bg-gradient-to-b from-[#e8e8e8] to-[#d0d0d0] flex flex-col items-center justify-center text-black px-4"
+            style={{ scale, opacity }}
+            className="relative font-semibold min-h-screen bg-gradient-to-b from-[#e8e8e8] to-[#d0d0d0] flex flex-col items-center justify-center text-black px-4"
         >
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f15_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f15_1px,transparent_1px)] bg-[size:60px_60px]"></div>
 
@@ -45,13 +45,9 @@ const HeroScroll: React.FC<SectionProps> = ({ scrollYProgress }) => {
 };
 
 // Section 2: The Roast Introduction
-const RoastIntro: React.FC<SectionProps> = ({ scrollYProgress }) => {
-    const opacity = useTransform(scrollYProgress, [0.1, 0.25], [0, 1]);
-    const y = useTransform(scrollYProgress, [0.1, 0.25], [100, 0]);
-
+const RoastIntro: React.FC = () => {
     return (
-        <motion.section
-            style={{ opacity, y }}
+        <section
             className="relative min-h-screen bg-gradient-to-b from-[#1a1a2e] to-[#16213e] text-white flex items-center justify-center px-4 py-20"
         >
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -88,7 +84,7 @@ const RoastIntro: React.FC<SectionProps> = ({ scrollYProgress }) => {
                     </motion.p>
                 </motion.div>
             </div>
-        </motion.section>
+        </section>
     );
 };
 
@@ -406,7 +402,7 @@ export default function ScrollSections() {
     return (
         <main ref={container} className="relative bg-black">
             <HeroScroll scrollYProgress={scrollYProgress} />
-            <RoastIntro scrollYProgress={scrollYProgress} />
+            <RoastIntro />
             <ImagesSection />
             <WhatIsPulsee />
             <Testimonials />
