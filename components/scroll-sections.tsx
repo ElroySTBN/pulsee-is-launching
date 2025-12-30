@@ -1,25 +1,20 @@
 'use client';
 
-import { useScroll, useTransform, motion, MotionValue } from 'motion/react';
-import React, { useRef } from 'react';
-
-interface SectionProps {
-    scrollYProgress: MotionValue<number>;
-}
+import { motion } from 'motion/react';
+import React from 'react';
 
 // Section 1: The Future of Pharmacist Scams
-const HeroScroll: React.FC<SectionProps> = ({ scrollYProgress }) => {
-    const scale = useTransform(scrollYProgress, [0, 0.15], [1, 0.9]);
-    const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-
+const HeroScroll: React.FC = () => {
     return (
-        <motion.section
-            style={{ scale, opacity }}
-            className="relative font-semibold min-h-screen bg-gradient-to-b from-[#e8e8e8] to-[#d0d0d0] flex flex-col items-center justify-center text-black px-4"
-        >
+        <section className="relative min-h-screen bg-gradient-to-b from-[#e8e8e8] to-[#d0d0d0] flex flex-col items-center justify-center text-black px-4">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f15_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f15_1px,transparent_1px)] bg-[size:60px_60px]"></div>
 
-            <div className="relative z-10 text-center max-w-4xl">
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="relative z-10 text-center max-w-4xl"
+            >
                 <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6">
                     The Future of{' '}
                     <span className="bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">
@@ -39,8 +34,8 @@ const HeroScroll: React.FC<SectionProps> = ({ scrollYProgress }) => {
                 >
                     ⬇️
                 </motion.div>
-            </div>
-        </motion.section>
+            </motion.div>
+        </section>
     );
 };
 
@@ -393,15 +388,9 @@ const Footer: React.FC = () => {
 
 // Main Component
 export default function ScrollSections() {
-    const container = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: container,
-        offset: ['start start', 'end end'],
-    });
-
     return (
-        <main ref={container} className="relative bg-black">
-            <HeroScroll scrollYProgress={scrollYProgress} />
+        <main className="relative bg-black">
+            <HeroScroll />
             <RoastIntro />
             <ImagesSection />
             <WhatIsPulsee />
