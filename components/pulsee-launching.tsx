@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 
 const COLOR = "#FFFFFF"
+const PULSEE_COLOR = "#3B82F6"
 const HIT_COLOR = "#333333"
 const BACKGROUND_COLOR = "#000000"
 const BALL_COLOR = "#FFFFFF"
@@ -102,6 +103,7 @@ interface Pixel {
     y: number
     size: number
     hit: boolean
+    color: string
 }
 
 interface Ball {
@@ -204,7 +206,7 @@ export function PulseeLaunching() {
                                     if (pixelMap[i][j]) {
                                         const x = startX + j * pixelSize
                                         const y = startY + i * pixelSize
-                                        pixelsRef.current.push({ x, y, size: pixelSize, hit: false })
+                                        pixelsRef.current.push({ x, y, size: pixelSize, hit: false, color: COLOR })
                                     }
                                 }
                             }
@@ -222,7 +224,7 @@ export function PulseeLaunching() {
                                 if (pixelMap[i][j]) {
                                     const x = startX + j * pixelSize
                                     const y = startY + i * pixelSize
-                                    pixelsRef.current.push({ x, y, size: pixelSize, hit: false })
+                                    pixelsRef.current.push({ x, y, size: pixelSize, hit: false, color: PULSEE_COLOR })
                                 }
                             }
                         }
@@ -358,7 +360,7 @@ export function PulseeLaunching() {
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
             pixelsRef.current.forEach((pixel) => {
-                ctx.fillStyle = pixel.hit ? HIT_COLOR : COLOR
+                ctx.fillStyle = pixel.hit ? HIT_COLOR : pixel.color
                 ctx.fillRect(pixel.x, pixel.y, pixel.size, pixel.size)
             })
 
